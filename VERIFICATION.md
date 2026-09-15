@@ -24,4 +24,4 @@ Verified locally on 2026-09-15.
 
 ## Remaining live gates
 
-The project is ready for deployment, not yet ready for submission. Before submission: deploy exact source, verify source parity and initial reads, publish real registry/GitHub test resources, execute canonical and adversarial Studionet paths, record finalized receipts and complete before/after readbacks, and prove one exact rollout consumption plus replay rejection.
+The exact source was deployed at `0xB50a27D4Cb640487975fCE89c22000938773304b`. Initial reads confirm protocol version 1, non-custodial operation, owner `0xa365f55a3bf352767bc5c5739ffddaee8fcf3a19`, and zero servers/requests. Before submission: publish the prepared real npm/GitHub resources, execute canonical and adversarial Studionet paths, record finalized receipts and complete before/after readbacks, and prove one exact rollout consumption plus replay rejection.

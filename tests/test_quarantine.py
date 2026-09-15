@@ -46,6 +46,10 @@ def test_only_owner_and_duplicate_package(direct_deploy,direct_vm,direct_bob):
     assert c.register_server(PACKAGE,REPO,OLD,PATH,POLICY,CONTROLLER)==1
     assert c.register_server(PACKAGE,REPO,OLD,PATH,POLICY,CONTROLLER)=="PACKAGE_ALREADY_REGISTERED"
 
+def test_decimal_controller_is_canonical_hex_address(direct_deploy):
+    c=deploy(direct_deploy);assert c.register_server(PACKAGE,REPO,OLD,PATH,POLICY,int(CONTROLLER,16))==1
+    assert c.get_server(1)["controller"]==CONTROLLER
+
 def test_safe_update_consumes_once_and_advances_baseline(direct_deploy,direct_vm):
     c=deploy(direct_deploy);setup(c);mock_sources(direct_vm);mock_model(direct_vm,True)
     assert c.assess_update(1,1)=="SAFE_UPDATE";r=c.get_request(1);assert r["revision"]==2 and len(r["evidence_digest"])==71

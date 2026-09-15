@@ -2,12 +2,12 @@
 
 Verified locally on 2026-09-15.
 
-- Direct Mode: `24 passed`.
+- Direct Mode: `25 passed`.
 - GenVM lint: `3 checks passed`.
 - GenVM validation: `10 methods` (`4 view`, `6 write`), no constructor arguments.
 - Architecture check: passed.
-- Exact contract source bytes: `15,348`.
-- Exact contract SHA-256: `8e5cd8e1db7ea1394d6533bc1f689602e5d3ae9029eea9b38a93a0bf9cceefe8`.
+- Exact contract source bytes: `15,634`.
+- Exact contract SHA-256: `b326c5f2218fc93096efd19a7c2aa9129dcca5c18948076de2ef68d4dc8e26da`.
 
 ## Covered invariants
 
@@ -24,4 +24,4 @@ Verified locally on 2026-09-15.
 
 ## Remaining live gates
 
-Deployment `0xB50a27D4Cb640487975fCE89c22000938773304b` is superseded because version 1 depended on npm Registry metadata. Version 2 removes npm entirely and derives exact commits from GitHub-controlled `v{version}` tags before commit/tree/blob verification. Redeploy the exact version-2 source before live testing.
+Deployment `0xB50a27D4Cb640487975fCE89c22000938773304b` is superseded because version 1 depended on npm Registry metadata. Deployment `0x638C6349D8b6C57C241ef95d66f384c28e02837B` is superseded because live registration exposed GenVM's decimal `str(Address)` representation for method arguments. Version 3 normalizes sender and Address arguments through one canonical lowercase 20-byte hex function and includes a direct regression test. Redeploy the exact version-3 source before live testing.

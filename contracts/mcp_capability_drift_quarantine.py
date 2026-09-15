@@ -12,7 +12,14 @@ SHA40=re.compile(r"^[0-9a-f]{40}$"); SHA256=re.compile(r"^sha256:[0-9a-f]{64}$")
 PATH=re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/-]{0,179}$")
 
 def canon(v): return json.dumps(v,sort_keys=True,separators=(",",":"))
-def sender(): return str(gl.message.sender_address).lower()
+def address_text(value):
+    text=str(value).lower()
+    if text.startswith("address(") and "0x" in text: text="0x"+text.split("0x",1)[1].split(")",1)[0]
+    if not text.startswith("0x"):
+        try: text="0x"+format(int(value),"040x")
+        except Exception: pass
+    return text
+def sender(): return address_text(gl.message.sender_address)
 def now(): return int(datetime.fromisoformat(str(gl.message_raw["datetime"]).replace("Z","+00:00")).timestamp())
 def unresolved(reason): return canon({"kind":UNRESOLVED,"reason":reason})
 def valid_repo(v): return re.fullmatch(r"[a-z0-9_.-]{1,39}/[a-z0-9_.-]{1,100}",v) is not None and ".." not in v
@@ -50,7 +57,7 @@ class MCPCapabilityDriftQuarantine(gl.Contract):
     @gl.public.write
     def register_server(self, package: str, repository: str, baseline_version: str, manifest_path: str, policy: str, deployment_controller: Address) -> typing.Any:
         if sender()!=self.owner: return "ONLY_OWNER"
-        pkg=package.strip().lower(); repo=repository.strip().lower(); version=baseline_version.strip().lower(); path=manifest_path.strip(); controller=str(deployment_controller).lower()
+        pkg=package.strip().lower(); repo=repository.strip().lower(); version=baseline_version.strip().lower(); path=manifest_path.strip(); controller=address_text(deployment_controller)
         if PACKAGE.fullmatch(pkg) is None: return "INVALID_PACKAGE"
         if not valid_repo(repo): return "INVALID_REPOSITORY"
         if VERSION.fullmatch(version) is None: return "INVALID_VERSION"
@@ -167,7 +174,7 @@ class MCPCapabilityDriftQuarantine(gl.Contract):
         s["policy"]=policy;s["policy_revision"]+=1;self.servers[server_id]=canon(s);return "POLICY_UPDATED"
 
     @gl.public.view
-    def get_protocol(self)->dict:return {"name":"MCPCapabilityDriftQuarantine","version":2,"owner":self.owner,"custody":False,"authority":"GitHub version tag/commit/tree/blob"}
+    def get_protocol(self)->dict:return {"name":"MCPCapabilityDriftQuarantine","version":3,"owner":self.owner,"custody":False,"authority":"GitHub version tag/commit/tree/blob"}
     @gl.public.view
     def get_counts(self)->dict:return {"server_count":int(self.server_count),"request_count":int(self.request_count)}
     @gl.public.view

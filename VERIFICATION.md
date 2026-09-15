@@ -6,13 +6,13 @@ Verified locally on 2026-09-15.
 - GenVM lint: `3 checks passed`.
 - GenVM validation: `10 methods` (`4 view`, `6 write`), no constructor arguments.
 - Architecture check: passed.
-- Exact contract source bytes: `16,300`.
-- Exact contract SHA-256: `52273b8c15822d42d028bd0ba623ffcc418ff5d2ed1f5107668a569b486c709b`.
+- Exact contract source bytes: `15,348`.
+- Exact contract SHA-256: `8e5cd8e1db7ea1394d6533bc1f689602e5d3ae9029eea9b38a93a0bf9cceefe8`.
 
 ## Covered invariants
 
 - Owner-only registry and candidate creation; duplicate package rejection.
-- npm package/version/repository/gitHead/dist-integrity binding.
+- GitHub version-tag resolution and exact commit/tree/blob binding.
 - GitHub commit/tree/blob identity, complete-tree and exact-byte verification.
 - Old and new manifests cannot be swapped between version identities.
 - Malformed, unavailable, truncated, mismatched and oversized evidence fails closed.
@@ -24,4 +24,4 @@ Verified locally on 2026-09-15.
 
 ## Remaining live gates
 
-The exact source was deployed at `0xB50a27D4Cb640487975fCE89c22000938773304b`. Initial reads confirm protocol version 1, non-custodial operation, owner `0xa365f55a3bf352767bc5c5739ffddaee8fcf3a19`, and zero servers/requests. Before submission: publish the prepared real npm/GitHub resources, execute canonical and adversarial Studionet paths, record finalized receipts and complete before/after readbacks, and prove one exact rollout consumption plus replay rejection.
+Deployment `0xB50a27D4Cb640487975fCE89c22000938773304b` is superseded because version 1 depended on npm Registry metadata. Version 2 removes npm entirely and derives exact commits from GitHub-controlled `v{version}` tags before commit/tree/blob verification. Redeploy the exact version-2 source before live testing.

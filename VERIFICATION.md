@@ -22,6 +22,6 @@ Verified locally on 2026-09-15.
 - Policy changes, expiry, baseline races and replay do not mutate protected state.
 - Only unresolved acquisition/model failure is revision-aware retryable.
 
-## Remaining live gates
+## Live verification
 
-Deployments `0xB50a27D4Cb640487975fCE89c22000938773304b` (npm provenance), `0x638C6349D8b6C57C241ef95d66f384c28e02837B` (decimal Address representation) and `0xd201d2F97419270bEdB8318E0Da481d3255A37c3` (shared GitHub REST availability) are superseded. Version 4 uses only fixed raw GitHub tag paths plus locked full-content SHA-256 commitments. Redeploy the exact version-4 source before live testing.
+Deployment `0xEC35892545763B02Dd404846eB53848890d41137` is verified on Studionet. The safe update completed once, outsider and wrong-digest calls left state unchanged, replay was rejected, and the hidden-payment update reached `CAPABILITY_DRIFT` with exact digest readback and could not be consumed. See `docs/studionet-v4-evidence.md`. Deployments `0xB50a27D4Cb640487975fCE89c22000938773304b`, `0x638C6349D8b6C57C241ef95d66f384c28e02837B` and `0xd201d2F97419270bEdB8318E0Da481d3255A37c3` are superseded historical versions.

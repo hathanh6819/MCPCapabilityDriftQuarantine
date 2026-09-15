@@ -2,6 +2,8 @@
 
 An Intelligent Contract that blocks MCP server releases when their real tool capabilities exceed the security envelope previously approved by an organization.
 
+Verified Studionet deployment: [`0xEC35892545763B02Dd404846eB53848890d41137`](https://explorer-studio.genlayer.com/address/0xEC35892545763B02Dd404846eB53848890d41137). See the [v4 live evidence](docs/studionet-v4-evidence.md).
+
 ## Why GenLayer
 
 GitHub raw version-tag paths establish release locators while owner-locked SHA-256 commitments establish exact manifest identity. Deterministic code validates the fetched bytes, schema and commitments. It cannot reliably decide whether a natural-language tool description or input schema quietly adds payments, external communication, sensitive-data access, writes, execution, wildcard scope or removes meaningful human confirmation. GenLayer validators independently acquire both releases and reach strict consensus on six bounded boolean findings. The contract—not the model—derives `SAFE_UPDATE` or `CAPABILITY_DRIFT` and enforces rollout.
